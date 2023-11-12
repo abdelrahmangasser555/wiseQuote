@@ -20,9 +20,32 @@
   align-items: center;
   justify-content: center;
   flex: 1;
+  border: 1px solid black;
+  margin-right: 2vw;
+  border-radius: 9px;
+  background-color: azure;
+  position: relative;
+  box-sizing: border-box;
+  padding: 2vw;
+  height: 40vh;
 
 }
 .my-body{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+.ai-main{
+  flex: 1;
+  border: 1px solid black;
+  border-radius: 9px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.ai-quote-text{
+  font-size: 1.5vw;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: black;
 }

@@ -6,6 +6,7 @@ export default function App() {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
   const [generated, setGenerated] = useState(false);
+  const [aiQuote, setAiQuote] = useState("");
   useEffect(() => {
     let source = axios.CancelToken.source(); // Create a cancel token source
 
@@ -32,6 +33,11 @@ export default function App() {
       source.cancel("Component unmounted"); // Cancel the request on unmount
     };
   }, [generated]);
+  function generateAiWisdom() {
+    axios.get("https://localhost:5000/ai").then((response) => {
+      setAiQuote(response.data.author);
+    });
+  }
 
   return (
     <div className="App">
@@ -45,7 +51,7 @@ export default function App() {
         </h1>
       </header>
       <div className="my-body">
-        <main className="real-main">
+        <main className="real-main" onClick={() => setGenerated(!generated)}>
           <div
             id="quote"
             style={{
@@ -57,13 +63,11 @@ export default function App() {
           >
             <span
               style={{
-                color: "green",
+                color: "blue",
                 fontSize: "2%",
                 fontWeight: "bold",
                 fontFamily: "times new roman",
                 textTransform: "uppercase",
-                marginLeft: "10%",
-                width: "100%",
               }}
             >
               quote :{" "}
@@ -88,47 +92,15 @@ export default function App() {
             {author}
           </div>
           <br />
-          <button onClick={() => setGenerated(!generated)}>Generate</button>
+          {/* <button onClick={() => setGenerated(!generated)}>Generate</button> */}
         </main>
         <div className="ai-main">
           <div className="ai-body">
             <div className="ai-quote">
-              <div className="ai-quote-text">
-                <span
-                  style={{
-                    color: "green",
-                    fontSize: "2%",
-                    fontWeight: "bold",
-                    fontFamily: "times new roman",
-                    textTransform: "uppercase",
-                    marginLeft: "10%",
-                    width: "100%",
-                  }}
-                >
-                  quote :{" "}
-                </span>{" "}
-                {quote}
-              </div>
-              <div className="ai-quote-author">
-                <span
-                  style={{
-                    color: "gold",
-                    fontSize: "1.8em",
-                    fontWeight: "bold",
-                    fontFamily: "times new roman",
-                    textTransform: "uppercase",
-                    textAlign: "center",
-                    textDecoration: "underline overline",
-                    //creating and italic font
-                    fontStyle: "italic",
-                  }}
-                >
-                  {author}
-                </span>
-              </div>
+              <div className="ai-quote-text">{aiQuote} hello world</div>
             </div>
             <div className="ai-button">
-              <button onClick={() => setGenerated(!generated)}>Generate</button>
+              {/* <button onClick={() => setGenerated(!generated)}>Generate</button> */}
             </div>
           </div>
         </div>
